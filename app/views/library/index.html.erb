@@ -1,0 +1,41 @@
+<h1>Library Books</h1>
+
+<div class="section group">
+
+  <div id="library" class="col span_1_of_2"></div>
+
+  <div id="book-featured" class="col span_2_of_2"></div>
+
+</div>
+
+<script id="library-book-template" type="text/x-handlebars-template">
+  <div data-book-id="{{this.id}}" class="library-book {{bookClass this}}">
+    <span class="library-book-title read-book">{{this.title}}</span>
+    {{#if read_count}}
+    <span class="buttons">
+      <button class="delete-book">delete</button>
+    </span>
+    {{/if}}
+  </div>
+</script>
+
+<script id="library-template" type="text/x-handlebars-template">
+  <div class="book-list">
+    {{#each books}}
+    <div>{{> libraryBook }}</div>
+    {{/each}}
+  </div>
+</script>
+
+<script id="book-template" type="text/x-handlebars-template">
+  <div class="book">
+    <div class="book-title">{{book.title}}
+      <small>by {{book.author}}</small>
+    </div>
+    <div class="book-summary">
+      {{book.summary}}
+    </div>
+  </div>
+</script>
+
+

@@ -1,0 +1,52 @@
+.loading {
+  min-height: 300px;
+  background-image: asset_url('loading.gif');
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.loading:before {
+  content: 'Loading...';
+}
+
+.book-title {
+  font-size: 1.4em;
+  font-weight: bold;
+  border-bottom: 0.1em solid #dddddd;
+  padding: 0 0 0.4em 0;
+  margin: 0 0 0.4em 0;
+
+  small {
+    color: #bbb;
+    white-space: nowrap;
+  }
+}
+
+.feature-book {
+  font-size: 0.8em;
+  line-height: 1.5em;
+}
+
+.library-book {
+  padding-bottom: 0.2em;
+
+  .buttons {
+    margin-left: 0.2em;
+    font-size: 0.6em;
+    button {
+      margin-left: 0.2em;
+    }
+
+    button:first-child {
+      margin-left: 0;
+    }
+  }
+
+}
+.library-book.book-read {
+  .library-book-title {
+    text-decoration: line-through;
+    color: #888888;
+  }
+}
+
