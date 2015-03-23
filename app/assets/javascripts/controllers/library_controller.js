@@ -1,26 +1,21 @@
-function LibraryController(libraryModel, libraryView) {
+function LibraryController(model, view) {
 
   this.run = function () {
-    libraryModel.books().done(function (books) {
-      libraryView.renderLibrary(books);
-    }).fail(function (jqx, payload) {
-      libraryView.displayError('Unable to load library books');
+
+    model.books().done(function (books) {
+      view.renderLibrary(books);
+    }).fail(view.displayError);
+
+    view.events.on('library:delete-book', function (event, bookId) {
+      view.removeBook(bookId); // Be optomistic on delete
+      model.deleteBook(bookId).fail(view.displayError);
     });
 
-    libraryView.events.on('library:delete-book', function (event, bookId) {
-      libraryView.removeBook(bookId); // Be optomistic
-      libraryModel.deleteBook(bookId).fail(function () {
-        libraryView.displayError('Unable to delete book with id ' + bookId);
-      });
-    });
-
-    libraryView.events.on('library:read-book', function (event, bookId) {
-      libraryModel.readBook(bookId).done(function (book) {
-          libraryView.readBook(book);
+    view.events.on('library:read-book', function (event, bookId) {
+      model.readBook(bookId).done(function (book) {
+          view.readBook(book);
         }
-      ).fail(function () {
-          libraryView.displayError('Unable to read book with id ' + bookId);
-        });
+      ).fail(view.displayError);
     });
   };
 }
