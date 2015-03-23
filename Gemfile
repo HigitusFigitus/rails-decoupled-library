@@ -32,6 +32,8 @@ gem 'jquery-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'faker'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -44,7 +46,6 @@ group :development, :test do
   gem 'spring'
 
   gem 'rspec-rails'
-  gem 'faker'
   gem 'simplecov'
   gem 'shoulda-matchers'
 
