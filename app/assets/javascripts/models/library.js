@@ -1,7 +1,7 @@
 function LibraryModel() {
 
   this.books = function () {
-    return  $.ajax({url: '/api/books'}).then(function (data) {
+    return $.ajax({url: '/api/books'}).then(function (data) {
       return data.books;
     });
   };
@@ -16,7 +16,9 @@ function LibraryModel() {
     return $.ajax({
       url: '/api/books/' + bookId + '/readit',
       method: 'post'
-    }).then(function(data){ return data.book });
+    }).then(function (data) {
+      return data.book
+    });
   }
 
 }

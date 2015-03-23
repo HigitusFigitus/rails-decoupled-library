@@ -3,9 +3,8 @@
 
 $(document).ready(function () {
   var library = new LibraryModel();
-  var view = new LibraryView();
-  var controller = new LibraryController(library, view);
-  controller.run();
+  var view = new LibraryView($('#library'), $('#book-featured'));
+  new LibraryController(library, view).run();
 });
 
 

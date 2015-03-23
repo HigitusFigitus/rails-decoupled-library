@@ -1,33 +1,25 @@
-function LibraryController(library, view) {
+function LibraryController(libraryModel, libraryView) {
 
   this.run = function () {
-    library.books().done(function (books) {
-      view.renderLibrary(books);
+    libraryModel.books().done(function (books) {
+      libraryView.renderLibrary(books);
     }).fail(function (jqx, payload) {
-      view.displayError('Unable to load library books');
+      libraryView.displayError('Unable to load library books');
     });
 
-    $library = $('#library');
-
-    $library.on('click', '.delete-book', function (event) {
-      event.preventDefault();
-      var $item = $(event.target).closest('.library-book');
-      var bookId = $item.data('bookId');
-      view.removeBook(bookId); // Be optomistic
-      library.deleteBook(bookId).fail(function () {
-        view.displayError('Unable to delete book with id ' + bookId);
+    libraryView.events.on('library:delete-book', function (event, bookId) {
+      libraryView.removeBook(bookId); // Be optomistic
+      libraryModel.deleteBook(bookId).fail(function () {
+        libraryView.displayError('Unable to delete book with id ' + bookId);
       });
     });
 
-    $library.on('click', '.read-book', function (event) {
-      event.preventDefault();
-      var $item = $(event.target).closest('.library-book');
-      var bookId = $item.data('bookId');
-      library.readBook(bookId).done(function (book) {
-          view.readBook(book);
+    libraryView.events.on('library:read-book', function (event, bookId) {
+      libraryModel.readBook(bookId).done(function (book) {
+          libraryView.readBook(book);
         }
       ).fail(function () {
-          view.displayError('Unable to read book with id ' + bookId);
+          libraryView.displayError('Unable to read book with id ' + bookId);
         });
     });
   };
